@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,47 @@
     <link rel="stylesheet" href="main.css">
     <script src="main.js"></script>
 </head>
+
 <body>
-    
+    <div>
+        Password Length:
+        <input type="number" id="size" value="8">
+    </div>
+    <div>
+        First Character:
+        <label>
+            <input type="checkbox" id="first-lower" checked> Lower Case</label>
+        <label>
+            <input type="checkbox" id="first-upper" checked> Upper Case</label>
+        <label>
+            <input type="checkbox" id="first-digit"> Digit</label>
+        <label>
+            <input type="checkbox" id="first-symbol"> Symbol</label>
+    </div>
+    <div>
+        Rest Character:
+        <label>
+            <input type="checkbox" id="rest-lower" checked> Lower Case</label>
+        <label>
+            <input type="checkbox" id="rest-upper" checked> Upper Case</label>
+        <label>
+            <input type="checkbox" id="rest-digit" checked> Digit</label>
+        <label>
+            <input type="checkbox" id="rest-symbol"> Symbol</label>
+    </div>
+    <div>
+        Repeat Character:
+        <label>
+            <input type="radio" name="repeat" value="yes"> Yes </label>
+        <label>
+            <input type="radio" name="repeat" value="no" checked> No</label>
+    </div>
+    <div>
+        <button type="button" onclick="doGenerate()">Generate</button>
+    </div>
+    <div>
+        <textarea id="results" rows="2"></textarea>
+    </div>
 </body>
+
 </html>
