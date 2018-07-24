@@ -29,11 +29,10 @@ function getNoRepeatRandomChars(size, chars, excludes) {
 }
 
 function generatePassword() {
-  var parts = Array.prototype.slice.call(arguments);
   var str = "";
-  for (var i = 0; i < parts.length; i++) {
-    var size = parts[i][0];
-    var chars = parts[i][1];
+  for (var i = 0; i < arguments.length; i++) {
+    var size = arguments[i][0];
+    var chars = arguments[i][1];
     str += getNoRepeatRandomChars(size, chars, str);
   }
   return str;
