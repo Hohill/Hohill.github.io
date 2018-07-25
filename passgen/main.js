@@ -36,12 +36,10 @@ function getRandomChars(size, chars) {
   return str;
 }
 
-function generatePassword(fn) {
+function generatePassword(fn, list) {
   var str = "";
-  for (var i = 1; i < arguments.length; i++) {
-    var size = arguments[i][0];
-    var chars = arguments[i][1];
-    str += fn(size, chars, str);
+  for (var i = 0; i < list.length; i++) {
+    str += fn(list[i].size, list[i].charts, str);
   }
   return str;
 }
@@ -83,6 +81,9 @@ function doGenerate() {
       }
     }
   }
-  var str = generatePassword(fn, [1, first], [size - 1, rest]);
+  var str = generatePassword(fn, [
+    { size: 1, charts: first },
+    { size: size - 1, charts: rest }
+  ]);
   document.getElementById("results").value = str;
 }
