@@ -1,0 +1,88 @@
+<!DOCTPYE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Generator</title>
+
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <link rel="styplesheet" href="test.css">
+  <script src="test.js"></script>
+</head>
+
+<bodY>
+  <div class="container">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="size" class="col-sm-2 control-label">Password Length</label>
+        <div class="col-sm-10">
+          <input type="nubmer" class="form-control" id="size" value="8">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">First Character</label>
+        <div class="col-sm-10 checkbox">
+          <label>
+            <input type="checkbox" id="first-upper" checked>Upper Case
+          </label>
+          <label>
+            <input type="checkbox" id="first-lower" checked>Lower Case
+          </label>
+          <label>
+            <input type="checkbox" id="first-digit" checked>Digit
+          </label>
+          <label>
+            <input type="checkbox" id="first-symbol">Symbol
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Rest Character</label>
+        <div class="checkbox col-sm-10">
+          <label>
+            <input type="checkbox" id="rest-upper" checked>Upper Case
+          </label>
+          <label>
+            <input type="checkbox" id="rest-lower" checked>Lower Case
+          </label>
+          <label>
+            <input type="checkbox" id="rest-digit" checked>Digit
+          </label>
+          <label>
+            <input type="checkbox" id="rest-symbol">Symbol
+          </label>
+        </div>
+      </div>
+  </div>
+  <div>
+
+  </div>
+  <div>
+    Repeat:
+    <label>
+      <input type="radio" name="repeat" value="yes">Yes</label>
+    <label>
+      <input type="radio" name="repeat" value="no" checked>No</label>
+  </div>
+  <div>
+    <button type="button" onclick="doGenerate()">Generator</button>
+  </div>
+  <div>
+    <textarea id="results" rows="2"></textarea>
+  </div>
+  </form>
+  </div>
+
+</body>
+
+</html>
