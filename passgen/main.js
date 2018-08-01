@@ -4,30 +4,13 @@ var UPPER_CASE_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var ALPHA = LOWER_CASE_ALPHA + UPPER_CASE_ALPHA;
 var SPECIAL_SYMBOL = "~!@#$%^&*?";
 
+/** 生成一个随机字符 */
 function getRandomChar(chars) {
   var i = Math.floor(Math.random() * chars.length);
   return chars[i];
 }
 
-function getNoRepeatRandomChars(size, chars, excludes) {
-  if (chars.length + excludes.length < size) {
-    throw new Error(
-      "chars.length must greator than size when noRepeat is true"
-    );
-  }
-  var str = "";
-  for (var i = 0; i < size; i++) {
-    for (;;) {
-      var c = getRandomChar(chars);
-      if (str.indexOf(c) === -1 && excludes.indexOf(c) === -1) {
-        str += c;
-        break;
-      }
-    }
-  }
-  return str;
-}
-
+/** 生成多个随机字符 */
 function getRandomChars(size, chars) {
   var str = "";
   for (var i = 0; i < size; i++) {
@@ -36,22 +19,45 @@ function getRandomChars(size, chars) {
   return str;
 }
 
+//**生成多个不重复随机字符 */
+function getNoRepeatRandomChars(size, chars) {
+  if (chars.length < size) {
+    throw new Error(
+      "chars.length must be greator than size when NoRepeat is true"
+    );
+  }
+  var str = "";
+  for (var i = 0; i < size; i++) {
+    for (;;) {
+      var c = getRandomChar(chars);
+      if (str.indexOf(c) === -1) {
+        str += c;
+        break;
+      }
+    }
+  }
+  return str;
+}
+
+//**生成随机密码 */
 function generatePassword(fn, list) {
+  //fn是随机字符生成器，list是生成字符范围的数组
   var str = "";
   for (var i = 0; i < list.length; i++) {
-    str += fn(list[i].size, list[i].charts, str);
+    str += fn(list[i].size, list[i].chars, str);
   }
   return str;
 }
 
 function doGenerate() {
   var size = Number(document.getElementById("size").value);
+  var mutiPassword = Number(document.getElementById("mutiPassword").value);
   var first = "";
-  if (document.getElementById("first-lower").checked) {
-    first += LOWER_CASE_ALPHA;
-  }
   if (document.getElementById("first-upper").checked) {
     first += UPPER_CASE_ALPHA;
+  }
+  if (document.getElementById("first-lower").checked) {
+    first += LOWER_CASE_ALPHA;
   }
   if (document.getElementById("first-digit").checked) {
     first += DIGIT;
@@ -60,11 +66,11 @@ function doGenerate() {
     first += SPECIAL_SYMBOL;
   }
   var rest = "";
-  if (document.getElementById("rest-lower").checked) {
-    rest += LOWER_CASE_ALPHA;
-  }
   if (document.getElementById("rest-upper").checked) {
     rest += UPPER_CASE_ALPHA;
+  }
+  if (document.getElementById("rest-lower").checked) {
+    rest += LOWER_CASE_ALPHA;
   }
   if (document.getElementById("rest-digit").checked) {
     rest += DIGIT;
@@ -76,14 +82,28 @@ function doGenerate() {
   var repeat = document.getElementsByName("repeat");
   for (var i = 0; i < repeat.length; i++) {
     if (repeat[i].checked) {
-      if (repeat[i].value === "yes") {
+      if ((repeat[i].value = "yes")) {
         fn = getRandomChars;
       }
     }
   }
-  var str = generatePassword(fn, [
-    { size: 1, charts: first },
-    { size: size - 1, charts: rest }
-  ]);
-  document.getElementById("results").value = str;
+
+  var passwords = [];
+  for (var i = 0; i < mutiPassword; i++) {
+    var str = generatePassword(fn, [
+      { size: 1, chars: first },
+      { size: size - 1, chars: rest }
+    ]);
+    passwords.push(str);
+  }
+  document.getElementById("results").value = passwords.join("\n");
 }
+
+function copyPasswords() {
+  document.getElementById("results").select();
+  document.execCommand("copy");
+}
+
+$(function() {
+  $('[data-toggle="popover"]').popover();
+});
