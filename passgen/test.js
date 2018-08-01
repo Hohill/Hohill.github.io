@@ -98,3 +98,12 @@ function doGenerate() {
   }
   document.getElementById("results").value = passwords.join("\n");
 }
+
+function copyPasswords() {
+  document.getElementById("results").select();
+  document.execCommand("copy");
+}
+
+$(function() {
+  $('[data-toggle="popover"]').popover();
+});
