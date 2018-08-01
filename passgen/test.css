@@ -17,3 +17,8 @@ body {
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
+#results {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+}
