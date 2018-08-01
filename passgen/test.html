@@ -12,77 +12,93 @@
   <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
     crossorigin="anonymous">
+  <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
   <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
-
-  <link rel="styplesheet" href="test.css">
+  <link rel="stylesheet" href="test.css">
   <script src="test.js"></script>
 </head>
 
-<bodY>
+<body>
   <div class="container">
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label for="size" class="col-sm-2 control-label">Password Length</label>
-        <div class="col-sm-10">
-          <input type="nubmer" class="form-control" id="size" value="8">
-        </div>
+    <div class="panel panel-primary" id="main-box">
+      <div class="panel-heading">
+        <h3 class="text-center">Password Generator</h3>
       </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">First Character</label>
-        <div class="col-sm-10 checkbox">
-          <label>
-            <input type="checkbox" id="first-upper" checked>Upper Case
-          </label>
-          <label>
-            <input type="checkbox" id="first-lower" checked>Lower Case
-          </label>
-          <label>
-            <input type="checkbox" id="first-digit" checked>Digit
-          </label>
-          <label>
-            <input type="checkbox" id="first-symbol">Symbol
-          </label>
-        </div>
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="size" class="col-sm-3 control-label">Password Length</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="size" value="8">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">First Character</label>
+            <div class="col-sm-9 checkbox">
+              <label>
+                <input type="checkbox" id="first-upper" checked>Upper Case
+              </label>
+              <label>
+                <input type="checkbox" id="first-lower" checked>Lower Case
+              </label>
+              <label>
+                <input type="checkbox" id="first-digit" checked>Digit
+              </label>
+              <label>
+                <input type="checkbox" id="first-symbol">Symbol
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Rest Character</label>
+            <div class="checkbox col-sm-9">
+              <label>
+                <input type="checkbox" id="rest-upper" checked>Upper Case
+              </label>
+              <label>
+                <input type="checkbox" id="rest-lower" checked>Lower Case
+              </label>
+              <label>
+                <input type="checkbox" id="rest-digit" checked>Digit
+              </label>
+              <label>
+                <input type="checkbox" id="rest-symbol">Symbol
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Repeat Character</label>
+            <div class="col-sm-9 radio">
+              <label>
+                <input type="radio" name="repeat" value="yes"> Yes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <label>
+                <input type="radio" name="repeat" value="no" checked> No</label>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="size" class="col-sm-3 control-label">Multiple Password</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="mutiPassword" value="10">
+              </div>
+            </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">
+              <button type="button" onclick="doGenerate()" class="btn btn-primary">Generator</button>
+            </label>
+            <div class="col-sm-9">
+              <textarea class="form-control" id="results" rows="10"></textarea>
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Rest Character</label>
-        <div class="checkbox col-sm-10">
-          <label>
-            <input type="checkbox" id="rest-upper" checked>Upper Case
-          </label>
-          <label>
-            <input type="checkbox" id="rest-lower" checked>Lower Case
-          </label>
-          <label>
-            <input type="checkbox" id="rest-digit" checked>Digit
-          </label>
-          <label>
-            <input type="checkbox" id="rest-symbol">Symbol
-          </label>
-        </div>
+      <div class="panel-footer">
+        <div class="text-center">&copy; 2018 Powered by Hohill</div>
       </div>
+    </div>
   </div>
-  <div>
-
-  </div>
-  <div>
-    Repeat:
-    <label>
-      <input type="radio" name="repeat" value="yes">Yes</label>
-    <label>
-      <input type="radio" name="repeat" value="no" checked>No</label>
-  </div>
-  <div>
-    <button type="button" onclick="doGenerate()">Generator</button>
-  </div>
-  <div>
-    <textarea id="results" rows="2"></textarea>
-  </div>
-  </form>
-  </div>
-
 </body>
 
 </html>

@@ -51,6 +51,7 @@ function generatePassword(fn, list) {
 
 function doGenerate() {
   var size = Number(document.getElementById("size").value);
+  var mutiPassword = Number(document.getElementById("mutiPassword").value);
   var first = "";
   if (document.getElementById("first-upper").checked) {
     first += UPPER_CASE_ALPHA;
@@ -86,9 +87,14 @@ function doGenerate() {
       }
     }
   }
-  var str = generatePassword(fn, [
-    { size: 1, chars: first },
-    { size: size - 1, chars: rest }
-  ]);
-  document.getElementById("results").value = str;
+
+  var passwords = [];
+  for (var i = 0; i < mutiPassword; i++) {
+    var str = generatePassword(fn, [
+      { size: 1, chars: first },
+      { size: size - 1, chars: rest }
+    ]);
+    passwords.push(str);
+  }
+  document.getElementById("results").value = passwords.join("\n");
 }
