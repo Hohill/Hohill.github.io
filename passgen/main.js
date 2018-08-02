@@ -106,4 +106,5 @@ function copyPasswords() {
 
 $(function() {
   $('[data-toggle="popover"]').popover();
+  doGenerate();
 });
