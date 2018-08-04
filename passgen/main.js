@@ -4,13 +4,11 @@ var UPPER_CASE_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var ALPHA = LOWER_CASE_ALPHA + UPPER_CASE_ALPHA;
 var SPECIAL_SYMBOL = "~!@#$%^&*?";
 
-/** 生成一个随机字符 */
 function getRandomChar(chars) {
   var i = Math.floor(Math.random() * chars.length);
   return chars[i];
 }
 
-/** 生成多个随机字符 */
 function getRandomChars(size, chars) {
   var str = "";
   for (var i = 0; i < size; i++) {
@@ -19,18 +17,17 @@ function getRandomChars(size, chars) {
   return str;
 }
 
-//**生成多个不重复随机字符 */
-function getNoRepeatRandomChars(size, chars) {
-  if (chars.length < size) {
+function getNoRepeatRandomChars(size, chars, excludes) {
+  if (chars.length < size + excludes.length) {
     throw new Error(
-      "chars.length must be greator than size when NoRepeat is true"
+      "According to your rules, pasword length cannot over " + chars.length
     );
   }
   var str = "";
   for (var i = 0; i < size; i++) {
     for (;;) {
       var c = getRandomChar(chars);
-      if (str.indexOf(c) === -1) {
+      if (str.indexOf(c) === -1 && excludes.indexOf(c) === -1) {
         str += c;
         break;
       }
@@ -50,53 +47,57 @@ function generatePassword(fn, list) {
 }
 
 function doGenerate() {
-  var size = Number(document.getElementById("size").value);
-  var mutiPassword = Number(document.getElementById("mutiPassword").value);
-  var first = "";
-  if (document.getElementById("first-upper").checked) {
-    first += UPPER_CASE_ALPHA;
-  }
-  if (document.getElementById("first-lower").checked) {
-    first += LOWER_CASE_ALPHA;
-  }
-  if (document.getElementById("first-digit").checked) {
-    first += DIGIT;
-  }
-  if (document.getElementById("first-symbol").checked) {
-    first += SPECIAL_SYMBOL;
-  }
-  var rest = "";
-  if (document.getElementById("rest-upper").checked) {
-    rest += UPPER_CASE_ALPHA;
-  }
-  if (document.getElementById("rest-lower").checked) {
-    rest += LOWER_CASE_ALPHA;
-  }
-  if (document.getElementById("rest-digit").checked) {
-    rest += DIGIT;
-  }
-  if (document.getElementById("rest-symbol").checked) {
-    rest += SPECIAL_SYMBOL;
-  }
-  var fn = getNoRepeatRandomChars;
-  var repeat = document.getElementsByName("repeat");
-  for (var i = 0; i < repeat.length; i++) {
-    if (repeat[i].checked) {
-      if ((repeat[i].value = "yes")) {
-        fn = getRandomChars;
+  try {
+    var size = Number(document.getElementById("size").value);
+    var mutiPassword = Number(document.getElementById("mutiPassword").value);
+    var first = "";
+    if (document.getElementById("first-upper").checked) {
+      first += UPPER_CASE_ALPHA;
+    }
+    if (document.getElementById("first-lower").checked) {
+      first += LOWER_CASE_ALPHA;
+    }
+    if (document.getElementById("first-digit").checked) {
+      first += DIGIT;
+    }
+    if (document.getElementById("first-symbol").checked) {
+      first += SPECIAL_SYMBOL;
+    }
+    var rest = "";
+    if (document.getElementById("rest-upper").checked) {
+      rest += UPPER_CASE_ALPHA;
+    }
+    if (document.getElementById("rest-lower").checked) {
+      rest += LOWER_CASE_ALPHA;
+    }
+    if (document.getElementById("rest-digit").checked) {
+      rest += DIGIT;
+    }
+    if (document.getElementById("rest-symbol").checked) {
+      rest += SPECIAL_SYMBOL;
+    }
+    var fn = getNoRepeatRandomChars;
+    var repeat = document.getElementsByName("repeat");
+    for (var i = 0; i < repeat.length; i++) {
+      if (repeat[i].checked) {
+        if (repeat[i].value === "yes") {
+          fn = getRandomChars;
+        }
       }
     }
-  }
 
-  var passwords = [];
-  for (var i = 0; i < mutiPassword; i++) {
-    var str = generatePassword(fn, [
-      { size: 1, chars: first },
-      { size: size - 1, chars: rest }
-    ]);
-    passwords.push(str);
+    var passwords = [];
+    for (var i = 0; i < mutiPassword; i++) {
+      var str = generatePassword(fn, [
+        { size: 1, chars: first },
+        { size: size - 1, chars: rest }
+      ]);
+      passwords.push(str);
+    }
+    document.getElementById("results").value = passwords.join("\n");
+  } catch (err) {
+    alert(err);
   }
-  document.getElementById("results").value = passwords.join("\n");
 }
 
 function copyPasswords() {
