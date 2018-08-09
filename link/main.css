@@ -1,0 +1,11 @@
+.links {
+}
+.link-item {
+  text-align: center;
+  background: aquamarine;
+  margin-bottom: 12px;
+  padding: 10px 0;
+}
+.link-item a {
+  color: black;
+}
